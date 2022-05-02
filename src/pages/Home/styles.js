@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  padding: 15px;
+  padding: 16px;
 `;
 
 export const AdsContainer = styled.div`
@@ -12,16 +12,12 @@ export const AdsContainer = styled.div`
 
     height: 180px;
   `}
-
-  p {
-    text-align: center;
-    color: orangered;
-  }
 `;
 
 export const ProfileContainer = styled.section`
   display: flex;
   justify-content: center;
+  align-items: center;
 
   margin-top: 24px;
 
@@ -34,9 +30,7 @@ export const ProfileContainer = styled.section`
 `;
 
 export const ProfileInfo = styled.section`
-  color: #fd951f;
-
-  margin-left: 8px;
+  margin-left: 16px;
 
   ul {
     list-style: none;
@@ -65,6 +59,31 @@ export const ProfileInfo = styled.section`
   }
 `;
 
+export const TechnologyContainer = styled.div`
+  max-width: 512px;
+  margin: 8px auto;
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 24px 16px;
+
+    list-style: none;
+
+    li {
+      padding: 8px;
+      background: #302f3d;
+      border-radius: 8px;
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+      text-align: center;
+
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+    }
+  }
+`;
+
 export const ProjectsContainer = styled.section`
   margin-top: 24px;
 
@@ -78,7 +97,9 @@ export const ProjectsContainer = styled.section`
 `;
 
 export const ProjectItem = styled.li`
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #302f3d;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 
   width: 450px;
@@ -117,9 +138,9 @@ export const ProjectItem = styled.li`
   }
 
   &:hover {
-    color: #fd951f;
+    /* color: #fd951f; */
 
-    border-color: #fd951f;
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
   & + li {

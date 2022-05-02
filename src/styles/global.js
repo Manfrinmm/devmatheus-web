@@ -18,9 +18,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    /* background: #e1e1e6; */
-    background: #202024;
-    -webkit-font-smoothing:antialiased;
+    color: #837E9F;
+    background: #22212C;
+    font-family: "Open Sans", sans-serif;
   }
 `;
 

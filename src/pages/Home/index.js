@@ -4,8 +4,10 @@ import axios from "axios";
 import photo from "../../assets/photo.jpg";
 import github from "../../assets/github.svg";
 import instagram from "../../assets/instagram.svg";
-import linkedin from "../../assets/linkedin.svg";
+import linkedIn from "../../assets/linkedin.svg";
 import link from "../../assets/link.svg";
+import code1 from "../../assets/code-1.png";
+import code2 from "../../assets/code-2.png";
 
 import projects from "../../data.json";
 import {
@@ -15,13 +17,55 @@ import {
   ProfileInfo,
   ProjectsContainer,
   ProjectItem,
+  TechnologyContainer,
 } from "./styles";
 
 export default function Home() {
   const [gif, setGif] = useState(null);
 
+  const data = {
+    profile: {
+      name: "Matheus Menezes Manfrin",
+      photo,
+    },
+    socialMedias: [
+      {
+        name: "github",
+        url: "https://github.com/manfrinmm",
+        slug: "github.com/manfrinmm",
+        icon: github,
+      },
+      {
+        name: "LinkedIn",
+        url: "https://linkedin.com/in/manfrinmm",
+        slug: "linkedin.com/in/manfrinmm",
+        icon: linkedIn,
+      },
+      {
+        name: "Instagram",
+        url: "https://instagram.com/manfrinmm",
+        slug: "instagram.com/manfrinmm",
+        icon: instagram,
+      },
+    ],
+    technologies: [
+      "JavaScript",
+      "Typescript",
+      "NodeJs",
+      "ReactJs",
+      "Git",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "GCP",
+      "AWS",
+    ],
+    projects,
+  };
+
   const api_key = "6STszV0RpYwd7ynrI66O5idh8nDyW3hs",
-    tag = "neiva do ceu",
+    tag = "javascript",
     rating = "G";
 
   useEffect(() => {
@@ -30,8 +74,9 @@ export default function Home() {
         `https://api.giphy.com/v1/gifs/random?api_key=${api_key}&tag=${tag}&rating=${rating}`,
       );
 
+      console.log(data.data.images.original.url);
       console.log(data.data.image_original_url);
-      setGif(data.data.image_original_url);
+      setGif(data.data.images.original.url);
     }
 
     loadGif();
@@ -39,50 +84,42 @@ export default function Home() {
 
   return (
     <Container>
-      <AdsContainer gif={gif}>
-        <p>Waiting for google ads...</p>
-      </AdsContainer>
+      <AdsContainer gif={code1} />
 
       <ProfileContainer>
-        <img src={photo} alt="Matheus Menezes Manfrin" />
+        <img src={data.profile.photo} alt={data.profile.name} />
 
         <ProfileInfo>
-          <h2>Matheus Menezes Manfrin</h2>
+          <h2>{data.profile.name}</h2>
+          <p>FullStack Developer JavaScript</p>
 
           <ul>
-            <li>
-              <a
-                href="https://github.com/Manfrinmm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={github} alt="Matheus Menezes Manfrin" />
-                <p>github.com/Manfrinmm</p>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/matheusmmm"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={linkedin} alt="Matheus Menezes Manfrin" />
-                <p>linkedin.com/in/matheusmmm</p>
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/matheus.mmn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={instagram} alt="Matheus Menezes Manfrin" />
-                <p>instagram.com/matheus.mmn</p>
-              </a>
-            </li>
+            {data.socialMedias.map((socialMedia) => (
+              <li key={socialMedia.name}>
+                <a
+                  href={socialMedia.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={socialMedia.icon} alt={socialMedia.name} />
+                  <p>{socialMedia.slug}</p>
+                </a>
+              </li>
+            ))}
           </ul>
         </ProfileInfo>
       </ProfileContainer>
+
+      <TechnologyContainer>
+        <ul>
+          {data.technologies.map((technology) => (
+            <li key={technology}>
+              <p>{technology}</p>
+            </li>
+          ))}
+        </ul>
+      </TechnologyContainer>
+
       <ProjectsContainer>
         <ul>
           {projects.map((project) => (
@@ -115,6 +152,8 @@ export default function Home() {
           ))}
         </ul>
       </ProjectsContainer>
+
+      <AdsContainer gif={code2} style={{ marginTop: "16px" }} />
     </Container>
   );
 }
